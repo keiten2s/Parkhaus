@@ -13,11 +13,11 @@ public class Ticketautomat {
     /**
      * The price to park for one hour
      */
-    private float priceHour;
+    float priceHour;
     /**
      * Datatable for tickets that have not been used
      */
-    private HashMap<String, Ticket> tickets;
+    final HashMap<String, Ticket> tickets;
 
     /**
      * Default constructor
@@ -114,9 +114,9 @@ public class Ticketautomat {
  * Internal class to represent a ticket issued by a ticket machine in a carpark
  */
 class Ticket {
-    private Calendar date;
-    private String id;
-    private boolean used = false;
+    final Calendar date;
+    final String id;
+    boolean used = false;
 
     /**
      * Creates a ticket with a custom time for testing purposes
