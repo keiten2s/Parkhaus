@@ -32,9 +32,9 @@ public class Parkhaus {
     }
 
     public boolean exitSpot(int autoNr) {
-        for(int i=0;i<spots.length;i++) {
-            if(spots[i].getFahrzeug() != null && spots[i].getFahrzeug().nr() == autoNr) {
-                spots[i].exit();
+        for (Parkplatz spot : spots) {
+            if (spot.getFahrzeug() != null && spot.getFahrzeug().nr() == autoNr) {
+                spot.exit();
                 return true;
             }
         }
@@ -47,9 +47,7 @@ public class Parkhaus {
         if(spotNr >= spots.length) {
             Parkplatz[] s = new Parkplatz[spotNr];
 
-            for(int i=0;i<s.length;i++) {
-                s[i] = spots[i];
-            }
+            System.arraycopy(spots, 0, s, 0, s.length);
             spots = s;
         }
 
