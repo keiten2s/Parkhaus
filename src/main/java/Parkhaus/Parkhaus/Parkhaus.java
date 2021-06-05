@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Parkhaus {
     private Parkplatz[] spots;
-    List<Auto> autos;
+    ArrayList<Auto> autos;
 
     /**
      * Constructor method
@@ -17,7 +17,7 @@ public class Parkhaus {
      */
     public Parkhaus(int size, Auto[] autos) {
         this.spots = new Parkplatz[size];
-        this.autos = (List) new ArrayList<Auto>(Arrays.asList(autos));
+        this.autos = new ArrayList<Auto>(Arrays.asList(autos));
 
         for(int i = 0; i < spots.length; i++) {
             spots[i] = new Parkplatz();
@@ -39,6 +39,7 @@ public class Parkhaus {
         //ist ein parkplatz gefragt der auserhalb des Arrays liegt ?
         if(spotNr >= spots.length) {
             Parkplatz[] s = new Parkplatz[spotNr];
+
             for(int i=0;i<s.length;i++) {
                 s[i] = spots[i];
             }
