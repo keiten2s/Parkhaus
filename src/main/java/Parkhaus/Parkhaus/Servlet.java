@@ -125,22 +125,14 @@ public class Servlet extends HttpServlet {
             }
 
             int nr = Integer.parseInt(parts[1]);
-            if(!parkhaus.exitSpot(nr)) {
-                System.out.println("AUTO NICHT GEFUNDEN!!!");
-            }else {
-                System.out.println("AUTO HAT VERLASSEN "+nr);
-            }
+            parkhaus.exitSpot(nr);
+
         } else if (status.equals("enter")) {
             einfahren++;
             int parkplatzNr = Integer.parseInt(parts[7]);
             Auto car = new Auto(Integer.parseInt(parts[1]), parts[6]);
 
-            if (!parkhaus.enterSpot(car, parkplatzNr)) {
-                System.out.println("PLATZ BELEGT!!!");
-            } else {
-                System.out.println("AUTO HAT GEPARKT "+ car.nr());
-            }
-
+            parkhaus.enterSpot(car, parkplatzNr);
         }
 
         average = summe / ausfahren;
