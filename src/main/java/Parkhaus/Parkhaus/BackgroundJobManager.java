@@ -56,7 +56,6 @@ public class BackgroundJobManager implements ServletContextListener {
     }
 
     public static void csv_out(String[] parts) {
-
         try (PrintWriter writer = new PrintWriter(new File(path))) {
 
             for(int i = 0; i < parts.length; i++) {
