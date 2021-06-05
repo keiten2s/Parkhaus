@@ -1,17 +1,23 @@
 package Parkhaus.Parkhaus;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Manages an array with Parkplatz objects
  */
 public class Parkhaus {
     private Parkplatz[] spots;
+    List<Auto> autos;
 
     /**
      * Constructor method
      *
      */
-    public Parkhaus(int size) {
+    public Parkhaus(int size, Auto[] autos) {
         this.spots = new Parkplatz[size];
+        this.autos = (List) new ArrayList<Auto>(Arrays.asList(autos));
 
         for(int i = 0; i < spots.length; i++) {
             spots[i] = new Parkplatz();
