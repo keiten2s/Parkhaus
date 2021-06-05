@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.Arrays;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
@@ -26,8 +25,6 @@ public class BackgroundJobManager implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
         scheduler = Executors.newSingleThreadScheduledExecutor();
-        //scheduler.scheduleAtFixedRate(new YourParsingJob(), 0, 5, TimeUnit.HOUR);
-        //System.out.println("Start");
 
         Scanner sc = null;
         try {
@@ -45,35 +42,13 @@ public class BackgroundJobManager implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent event) {
-        //System.out.println("Stop");
-        //csv_out(parts);
         scheduler.shutdownNow();
     }
 
-/**
-    public void downloadFile(HttpServletResponse response) {
-
-        String sourceFile = "H:/Neuer Ordner/Parkhaus/src/main/files/source.csv";
-        try {
-            FileInputStream inputStream = null;
-            try {
-                inputStream = new FileInputStream(sourceFile);
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
-            String disposition = "attachment; fileName=source.csv";
-            response.setContentType("text/csv");
-            response.setHeader("Content-Disposition", disposition);
-            response.setHeader("content-Length", String.valueOf(stream(inputStream, response.getOutputStream())));
-
-        } catch (IOException e) {
-            System.out.println (e.toString());
-        }
-    }*/
-
     public static void csv_out(String[] parts){
-        try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
+        try (PrintWriter writer = new PrintWriter(new File("H:/Neuer Ordner/Parkhaus/src/main/files/source.csv"))) {
             StringBuilder sb = new StringBuilder();
+            System.out.println(parts);
 
             for(int i = 0; i < parts.length; i++) {
                 sb.append(parts[i]);
