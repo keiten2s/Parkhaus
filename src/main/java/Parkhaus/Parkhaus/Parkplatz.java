@@ -1,9 +1,11 @@
 package Parkhaus.Parkhaus;
 
+
 public class Parkplatz implements ParkplatzInt {
 
     private Auto auto;
     private int nr = 0;
+
 
     public Parkplatz() {}
 
