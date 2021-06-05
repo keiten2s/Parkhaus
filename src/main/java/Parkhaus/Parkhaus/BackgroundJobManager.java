@@ -35,7 +35,7 @@ public class BackgroundJobManager implements ServletContextListener {
         sc.useDelimiter(",");
         while (sc.hasNext())
         {
-            System.out.print(sc.next()+"\n");
+            System.out.print(sc.next());
         }
         sc.close();
     }
@@ -48,7 +48,6 @@ public class BackgroundJobManager implements ServletContextListener {
     public static void csv_out(String[] parts){
         try (PrintWriter writer = new PrintWriter(new File("H:/Neuer Ordner/Parkhaus/src/main/files/source.csv"))) {
             StringBuilder sb = new StringBuilder();
-            System.out.println(parts);
 
             for(int i = 0; i < parts.length; i++) {
                 sb.append(parts[i]);
