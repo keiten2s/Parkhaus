@@ -18,13 +18,7 @@ public class Auto implements AutoInt {
     /**
      * Constructor Method
      * @param nr Database ID
-     * @param //timerbegin When the car starts parking
-     * @param //duration How long the car parks
-     * @param //price Price
-     * @param //ticket TicketId @see Ticket
      * @param farbe Color of the car (color code)
-     * @param //space Index position in Parkhaus
-     * @param //clientcategory Familycar, etc.
      * @param vehicletype Type of vehicle (any)
      * @param license Licenseplate
      */
