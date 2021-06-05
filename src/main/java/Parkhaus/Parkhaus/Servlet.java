@@ -147,19 +147,18 @@ public class Servlet extends HttpServlet {
             sum = parts[3];
         }
 
-        if (body != null) {
-            if (sum.length() > 3) {
-                String res = sum.substring(0, sum.length() - 3) + "." + sum.substring(sum.length() - 3, sum.length());
-                summe += Float.parseFloat(res);
-            } else if (sum.length() == 3) {
-                String res = "0." + sum;
-                summe += Float.parseFloat(res);
-            } else if (sum.length() == 2) {
-                String res = "0.0" + sum;
-                summe += Float.parseFloat(res);
-            }
-            // System.out.println(summe);
+
+        if (sum.length() > 3) {
+            String res = sum.substring(0, sum.length() - 3) + "." + sum.substring(sum.length() - 3, sum.length());
+            summe += Float.parseFloat(res);
+        } else if (sum.length() == 3) {
+            String res = "0." + sum;
+            summe += Float.parseFloat(res);
+        } else if (sum.length() == 2) {
+            String res = "0.0" + sum;
+            summe += Float.parseFloat(res);
         }
+            // System.out.println(summe);
 
         if (status.equals("leave")) {
             ausfahren++;
@@ -222,19 +221,14 @@ public class Servlet extends HttpServlet {
             } else {
                 stringBuilder.append("");
             }
-        } catch (IOException ex) {
-            throw ex;
         } finally {
             if (bufferedReader != null) {
                 try {
                     bufferedReader.close();
-                } catch (IOException ex) {
-                    throw ex;
-                }
+                } catch (IOException ignored) {}
             }
         }
-
-        String body = stringBuilder.toString();
-        return body;
+        
+        return stringBuilder.toString();
     }
 }
