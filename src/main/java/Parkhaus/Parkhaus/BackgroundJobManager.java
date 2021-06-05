@@ -17,7 +17,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 @WebListener
 public class BackgroundJobManager implements ServletContextListener {
-    
+
     private static String path = System.getProperty("user.dir")+"\\";
     HttpServletRequest request;
     HttpServletResponse response;
