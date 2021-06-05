@@ -70,7 +70,6 @@ public class CommandHandler {
                 "  ]\n" +
                 "}";
         out.println(anzahlString);
-
     }
 
     public void graphParkverhalten(int langzeitparken, int kurzzeitparken) throws IOException {
