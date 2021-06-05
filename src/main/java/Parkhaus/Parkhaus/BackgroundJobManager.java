@@ -46,7 +46,7 @@ public class BackgroundJobManager implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent event) {
         //System.out.println("Stop");
-        csv_out(parts);
+        //csv_out(parts);
         scheduler.shutdownNow();
     }
 
@@ -71,11 +71,11 @@ public class BackgroundJobManager implements ServletContextListener {
         }
     }*/
 
-    public void csv_out(Array parts){
+    public void csv_out(String[] parts){
         try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
             StringBuilder sb = new StringBuilder();
 
-            for(int i = 0; i < parts.length(); i++) {
+            for(int i = 0; i < parts.length; i++) {
                 sb.append(parts[i]);
             }
             writer.write(sb.toString());
