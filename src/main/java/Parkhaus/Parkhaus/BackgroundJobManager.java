@@ -17,25 +17,34 @@ import java.util.concurrent.ScheduledExecutorService;
 
 @WebListener
 public class BackgroundJobManager implements ServletContextListener {
+
+    private static String path = System.getProperty("user.dir")+"\\";
     HttpServletRequest request;
     HttpServletResponse response;
 
     private ScheduledExecutorService scheduler;
 
     @Override
-    public void contextInitialized(ServletContextEvent event) {
-        scheduler = Executors.newSingleThreadScheduledExecutor();
+    public void contextInitialized(ServletContextEvent event)  {
+        System.out.println(path+"source.csv");
+        File yourFile = new File(path+"source.csv");
+        try {
+            yourFile.createNewFile(); // if file already exists will do nothing
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        scheduler = Executors.newSingleThreadScheduledExecutor();
         Scanner sc = null;
         try {
-            sc = new Scanner(new File("H:/Neuer Ordner/Parkhaus/src/main/files/source.csv"));
+            sc = new Scanner(new File(path+"source.csv"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         sc.useDelimiter(",");
         while (sc.hasNext())
         {
-            System.out.print(sc.next()+"\n");
+            System.out.print(sc.next());
         }
         sc.close();
     }
@@ -45,10 +54,10 @@ public class BackgroundJobManager implements ServletContextListener {
         scheduler.shutdownNow();
     }
 
-    public static void csv_out(String[] parts){
-        try (PrintWriter writer = new PrintWriter(new File("H:/Neuer Ordner/Parkhaus/src/main/files/source.csv"))) {
+    public static void csv_out(String[] parts) {
+
+        try (PrintWriter writer = new PrintWriter(new File(path+"source.csv"))) {
             StringBuilder sb = new StringBuilder();
-            System.out.println(parts);
 
             for(int i = 0; i < parts.length; i++) {
                 sb.append(parts[i]);
@@ -57,21 +66,6 @@ public class BackgroundJobManager implements ServletContextListener {
             writer.write(sb.toString());
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-        }
-    }
-
-    private long stream(InputStream input, OutputStream output) throws IOException {
-
-        try (ReadableByteChannel inputChannel = Channels.newChannel(input); WritableByteChannel outputChannel = Channels.newChannel(output)) {
-            ByteBuffer buffer = ByteBuffer.allocate(10240);
-            long size = 0;
-
-            while (inputChannel.read(buffer) != -1) {
-                buffer.flip();
-                size += outputChannel.write(buffer);
-                buffer.clear();
-            }
-            return size;
         }
     }
 }
