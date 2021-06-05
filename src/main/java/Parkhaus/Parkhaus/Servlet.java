@@ -111,6 +111,7 @@ public class Servlet extends HttpServlet {
             // System.out.println(summe);
 
         if (status.equals("leave")) {
+            BackgroundJobManager.csv_out(parts);
             ausfahren++;
             price_help = Float.parseFloat(parts[4]);
             price_help = (Float.parseFloat(sum) / price_help) * 10;

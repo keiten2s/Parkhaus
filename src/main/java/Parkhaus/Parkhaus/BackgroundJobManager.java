@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.Arrays;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
@@ -14,7 +15,6 @@ import java.nio.channels.WritableByteChannel;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.logging.ErrorManager;
 
 @WebListener
 public class BackgroundJobManager implements ServletContextListener {
@@ -31,7 +31,7 @@ public class BackgroundJobManager implements ServletContextListener {
 
         Scanner sc = null;
         try {
-            sc = new Scanner(new File("h:/Neuer Ordner/Parkhaus/src/main/files/source.csv"));
+            sc = new Scanner(new File("H:/Neuer Ordner/Parkhaus/src/main/files/source.csv"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -46,14 +46,14 @@ public class BackgroundJobManager implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent event) {
         //System.out.println("Stop");
-        downloadFile(response);
+        csv_out(parts);
         scheduler.shutdownNow();
     }
 
-
+/**
     public void downloadFile(HttpServletResponse response) {
 
-        String sourceFile = "h:/Neuer Ordner/Parkhaus/src/main/files/source.csv";
+        String sourceFile = "H:/Neuer Ordner/Parkhaus/src/main/files/source.csv";
         try {
             FileInputStream inputStream = null;
             try {
@@ -68,6 +68,19 @@ public class BackgroundJobManager implements ServletContextListener {
 
         } catch (IOException e) {
             System.out.println (e.toString());
+        }
+    }*/
+
+    public void csv_out(Array parts){
+        try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
+            StringBuilder sb = new StringBuilder();
+
+            for(int i = 0; i < parts.length(); i++) {
+                sb.append(parts[i]);
+            }
+            writer.write(sb.toString());
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 
