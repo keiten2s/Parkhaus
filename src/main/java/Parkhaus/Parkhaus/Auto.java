@@ -2,11 +2,11 @@ package Parkhaus.Parkhaus;
 //Test
 //Test2222
 public class Auto implements AutoInt {
-    private int nr;
-    private String farbe;
-    private String vehicletype;
-    private String license;
-    private boolean isParked = false;
+    int nr;
+    String farbe;
+    String vehicletype;
+    String license;
+    boolean isParked = false;
 
     /**
      * Blank Constructor
