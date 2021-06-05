@@ -11,6 +11,13 @@ public class Parkhaus {
     private Parkplatz[] spots;
     ArrayList<Auto> autos;
 
+    public Parkhaus(int size) {
+        this.spots = new Parkplatz[size];
+
+        for(int i = 0; i < spots.length; i++) {
+            spots[i] = new Parkplatz();
+        }
+    }
     /**
      * Constructor method
      *
