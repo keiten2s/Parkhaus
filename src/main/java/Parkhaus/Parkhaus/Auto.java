@@ -23,7 +23,7 @@ public class Auto implements AutoInt {
      * @param license Licenseplate
      */
     public Auto(int nr, String farbe, String vehicletype, String license) {
-        if (pruefeKennzeichen(this.license) == false) {
+        if (!pruefeKennzeichen(this.license)) {
             throw new RuntimeException();
         }
 
