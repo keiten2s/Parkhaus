@@ -10,10 +10,8 @@ import java.util.List;
 public class Parkhaus {
     private Parkplatz[] spots;
     ArrayList<Auto> autos;
-<<<<<<< Updated upstream
-=======
     ArrayList<Parkplatz> parkplätze;
->>>>>>> Stashed changes
+
 
     public Parkhaus(int size) {
         this.spots = new Parkplatz[size];
@@ -26,13 +24,11 @@ public class Parkhaus {
      * Constructor method
      *
      */
-    public Parkhaus(int size, Auto[] autos) {
+    public Parkhaus(int size, Auto[] autos, Parkplatz[] parkplätze) {
         this.spots = new Parkplatz[size];
         this.autos = new ArrayList<Auto>(Arrays.asList(autos));
-<<<<<<< Updated upstream
-=======
         this.parkplätze = new ArrayList<Parkplatz>(Arrays.asList(parkplätze));
->>>>>>> Stashed changes
+
 
         for(int i = 0; i < spots.length; i++) {
             spots[i] = new Parkplatz();
