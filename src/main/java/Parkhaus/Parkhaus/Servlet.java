@@ -56,74 +56,26 @@ public class Servlet extends HttpServlet {
 
         if (command.equals("cmd")) {
             PrintWriter out = response.getWriter();
+            CommandHandler commandhandler = new CommandHandler(request,response);
 
             switch (param) {
                 case "sum":
-                    Float sum = summe;
-                    //out = response.getWriter();
-
-                    response.setContentType("text/html");
-                    out.println("Gesamteinnahmen: &euro; " + sum);
-
-                    System.out.println("sum = " + sum);
+                    commandhandler.sum(summe);
                     break;
                 case "avg":
-                    Float avg = average;
-                    //out = response.getWriter();
-
-                    response.setContentType("text/html");
-
-                    out.println("durschnittliche Kosten: &euro; " + avg + " durchschnittliche Dauer: " + avg + " Minuten");
-                    System.out.println("avg = " + avg);
+                    commandhandler.avg(average);
                     break;
                 case "Besucher":
-                    Integer besucher = ausfahren;
-                    //out = response.getWriter();
-
-                    response.setContentType("text/html");
-
-                    out.println("Gesamt Besucherzahl " + besucher);
-                    System.out.println("Besucherzahlen = " + besucher);
+                    commandhandler.besucher(einfahren);
                     break;
                 case "Preis":
-                    Float preis = price_help;
-                    //out = response.getWriter();
-
-                    response.setContentType("text/html");
-
-                    out.println("Preis pro Stunde: &euro;" + preis);
-                    System.out.println("Preis pro Stunde = " + preis);
+                    commandhandler.preis(price_help);
                     break;
                 case "Anzahl":
-                    response.setContentType("text/plain");
-                    //out = response.getWriter();
-                    String anzahlString = "{\n" +
-                            "  \"data\": [\n" +
-                            "    {\n" +
-                            "      \"x\": [\n"+
-                            "        \"Anzahl\",\n" +
-                            "        \"AnzahlGesamt\"\n" +
-                            "      ],\n" +
-                            "      \"y\": [" ;
-                    int anz = parkhaus.anzahlBelegt();
-                    anzahlString  +=  ""+anz+",\n";
-                    anzahlString  +=  ""+(langzeitparken+kurzzeitparken+anz)+"\n";
-                    anzahlString  +=  "      ],\n" +
-                            "      \"type\": \"bar\"\n" +
-                            "    }\n" +
-                            "  ]\n" +
-                            "}";
-                    out.println(anzahlString);
-
+                    commandhandler.graphAnzahl(parkhaus,langzeitparken,kurzzeitparken);
                     break;
                 case "Parkverhalten":
-                    response.setContentType("text/plain");
-                    //out = response.getWriter();
-                    String chartString = "{\"data\": [{\"values\": [\""+langzeitparken+"\",\""+kurzzeitparken+"\"],\"labels\": [\"Langzeitparker (ab 20 Min)\",\"Kurzzeitparker\"],\"type\": \"pie\"}]}";
-
-
-                    out.println(chartString);
-
+                    commandhandler.graphParkverhalten(langzeitparken,kurzzeitparken);
                     break;
                 default:
                     System.out.println("Invalid Command: " + request.getQueryString());
