@@ -19,18 +19,16 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Parkhaus")
     //@WebServlet(name = "Parkhaus", value = "/")
 public class Servlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    static final long serialVersionUID = 1L;
 
-    private Float summe = 0.0f;
-    private Integer ausfahren = 0;
-    private Float average = 0.0f;
-    private Float price_help = 0.0f;
-    private int langzeitparken = 0;
-    private int kurzzeitparken = 0;
-    private int einfahren = 0;
-
-    //Botch
-    private Parkhaus parkhaus = new Parkhaus(10);
+    Float summe = 0.0f;
+    Integer ausfahren = 0;
+    Float average = 0.0f;
+    Float price_help = 0.0f;
+    int langzeitparken = 0;
+    int kurzzeitparken = 0;
+    int einfahren = 0;
+    final Parkhaus parkhaus = new Parkhaus(10);
 
     /**
      * Constructor method
