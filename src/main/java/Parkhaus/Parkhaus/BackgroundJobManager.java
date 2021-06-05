@@ -4,13 +4,7 @@ package Parkhaus.Parkhaus;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.WritableByteChannel;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -19,8 +13,6 @@ import java.util.concurrent.ScheduledExecutorService;
 public class BackgroundJobManager implements ServletContextListener {
 
     private static String path = System.getProperty("user.dir")+"\\"+"source_.csv";
-    HttpServletRequest request;
-    HttpServletResponse response;
     static StringBuilder sb = new StringBuilder();
 
     private ScheduledExecutorService scheduler;
