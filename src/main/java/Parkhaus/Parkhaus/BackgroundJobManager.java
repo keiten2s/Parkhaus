@@ -71,13 +71,14 @@ public class BackgroundJobManager implements ServletContextListener {
         }
     }*/
 
-    public void csv_out(String[] parts){
+    public static void csv_out(String[] parts){
         try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
             StringBuilder sb = new StringBuilder();
 
             for(int i = 0; i < parts.length; i++) {
                 sb.append(parts[i]);
             }
+            sb.append("\n");
             writer.write(sb.toString());
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
