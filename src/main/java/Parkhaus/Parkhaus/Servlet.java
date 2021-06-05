@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -116,11 +117,13 @@ public class Servlet extends HttpServlet {
             price_help = Float.parseFloat(parts[4]);
             price_help = (Float.parseFloat(sum) / price_help) * 10;
 
-            if(Integer.parseInt(parts[3])>20000){
-                langzeitparken++;
-            }else {
-                kurzzeitparken++;
-            }
+            Arrays.stream(parts)
+                    .filter(data -> Integer.parseInt(parts[3]) > 20000)
+                    .forEach(data -> langzeitparken++);
+
+            Arrays.stream(parts)
+                    .filter(data -> Integer.parseInt(parts[3]) <= 20000)
+                    .forEach(data -> kurzzeitparken++);
 
             int nr = Integer.parseInt(parts[1]);
             parkhaus.exitSpot(nr);
@@ -142,6 +145,8 @@ public class Servlet extends HttpServlet {
         return getServletConfig().getServletContext();
     }
 
+
+
     private Float getPersistentSum() {
         Float sum = (Float) getApplication().getAttribute("sum");
 
@@ -154,10 +159,12 @@ public class Servlet extends HttpServlet {
 
         try {
             InputStream inputStream = request.getInputStream();
+
             if (inputStream != null) {
                 bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 char[] charBuffer = new char[128];
                 int bytesRead = -1;
+
                 while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
                     stringBuilder.append(charBuffer, 0, bytesRead);
                 }
