@@ -18,6 +18,7 @@ public class Parkhaus {
             spots[i] = new Parkplatz();
         }
     }
+
     /**
      * Constructor method
      *
@@ -44,14 +45,14 @@ public class Parkhaus {
 
     public boolean enterSpot(Auto auto, int spotNr) {
         //ist ein parkplatz gefragt der auserhalb des Arrays liegt ?
-        if(spotNr >= spots.length) {
+        if (spotNr >= spots.length) {
             Parkplatz[] s = new Parkplatz[spotNr];
 
             System.arraycopy(spots, 0, s, 0, s.length);
             spots = s;
         }
 
-        if(spots[spotNr-1].istBelegt()) {
+        if (spots[spotNr-1].istBelegt()) {
             System.out.println("Parkplatz ist schon belegt!");
             return false;
         }
