@@ -18,16 +18,17 @@ import java.util.concurrent.ScheduledExecutorService;
 @WebListener
 public class BackgroundJobManager implements ServletContextListener {
 
-    private static String path = System.getProperty("user.dir")+"\\";
+    private static String path = System.getProperty("user.dir")+"\\"+"source_.csv";
     HttpServletRequest request;
     HttpServletResponse response;
+    static StringBuilder sb = new StringBuilder();
 
     private ScheduledExecutorService scheduler;
 
     @Override
     public void contextInitialized(ServletContextEvent event)  {
         System.out.println(path+"source.csv");
-        File yourFile = new File(path+"source.csv");
+        File yourFile = new File(path);
         try {
             yourFile.createNewFile(); // if file already exists will do nothing
         } catch (IOException e) {
@@ -37,7 +38,7 @@ public class BackgroundJobManager implements ServletContextListener {
         scheduler = Executors.newSingleThreadScheduledExecutor();
         Scanner sc = null;
         try {
-            sc = new Scanner(new File(path+"source.csv"));
+            sc = new Scanner(new File(path));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -56,11 +57,13 @@ public class BackgroundJobManager implements ServletContextListener {
 
     public static void csv_out(String[] parts) {
 
-        try (PrintWriter writer = new PrintWriter(new File(path+"source.csv"))) {
-            StringBuilder sb = new StringBuilder();
+        try (PrintWriter writer = new PrintWriter(new File(path))) {
 
             for(int i = 0; i < parts.length; i++) {
-                sb.append(parts[i]);
+                if(i > 0) {
+                    sb.append(",");
+                }
+                    sb.append(parts[i]);
             }
             sb.append("\n");
             writer.write(sb.toString());
