@@ -17,8 +17,6 @@ import java.util.concurrent.ScheduledExecutorService;
 
 @WebListener
 public class BackgroundJobManager implements ServletContextListener {
-    HttpServletRequest request;
-    HttpServletResponse response;
 
     private ScheduledExecutorService scheduler;
 
@@ -56,21 +54,6 @@ public class BackgroundJobManager implements ServletContextListener {
             writer.write(sb.toString());
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-        }
-    }
-
-    private long stream(InputStream input, OutputStream output) throws IOException {
-
-        try (ReadableByteChannel inputChannel = Channels.newChannel(input); WritableByteChannel outputChannel = Channels.newChannel(output)) {
-            ByteBuffer buffer = ByteBuffer.allocate(10240);
-            long size = 0;
-
-            while (inputChannel.read(buffer) != -1) {
-                buffer.flip();
-                size += outputChannel.write(buffer);
-                buffer.clear();
-            }
-            return size;
         }
     }
 }
