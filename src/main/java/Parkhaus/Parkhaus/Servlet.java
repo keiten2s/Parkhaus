@@ -1,10 +1,8 @@
 package Parkhaus.Parkhaus;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Arrays;
 
 import javax.servlet.ServletContext;
@@ -45,6 +43,31 @@ public class Servlet extends HttpServlet {
      *      response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //System.out.println(BackgroundJobManager.str2.size());
+        for (int i = 0; i < BackgroundJobManager.str2.size(); i++) {
+            //System.out.println("kekw");
+            //System.out.println(BackgroundJobManager.str2.get(i));
+            String param = BackgroundJobManager.str2.get(i);
+            System.out.println(param);
+            String req = "http://localhost:8080/";
+            URL url = new URL(req);
+            HttpURLConnection connection = (HttpURLConnection)
+                    url.openConnection();
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setInstanceFollowRedirects(false);
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "text/plain");
+            connection.setRequestProperty("charset", "utf-8");
+            connection.setRequestProperty("Content-Length", "" +  Integer.toString(param.getBytes().length));
+            connection.setUseCaches (false);
+
+            DataOutputStream out = new DataOutputStream(connection.getOutputStream ());
+            out.writeBytes(param);
+            out.flush();
+            out.close();
+            connection.disconnect();
+        }
         String queryString = request.getQueryString();
         if (queryString == null)
             return;
@@ -88,6 +111,10 @@ public class Servlet extends HttpServlet {
      *      response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String messsage = request.getParameter("str");
+        System.out.println(messsage);
+
+
         String body = getBody(request);
         //0 = status, 1 = int nummer, 2 = ?, 3 = String sum, 4 = ?, 5 = ?, 6 = String farbe
         String[] parts = body.split(",");
@@ -129,6 +156,7 @@ public class Servlet extends HttpServlet {
             parkhaus.exitSpot(nr);
 
         } else if (status.equals("enter")) {
+            BackgroundJobManager.csv_out(parts);
             einfahren++;
             int parkplatzNr = Integer.parseInt(parts[7]);
             Auto car = new Auto(Integer.parseInt(parts[1]), parts[6]);

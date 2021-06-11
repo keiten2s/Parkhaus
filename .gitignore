@@ -1,3 +1,13 @@
 
 target/Parkhaus-1.0-SNAPSHOT/META-INF/MANIFEST.MF
 *.MF
+target/Parkhaus-1.0-SNAPSHOT/WEB-INF/classes/Parkhaus/Parkhaus/Servlet.class
+target/Parkhaus-1.0-SNAPSHOT/WEB-INF/classes/Parkhaus/Parkhaus/Servlet.class
+target/Parkhaus-1.0-SNAPSHOT/WEB-INF/classes/Parkhaus/Parkhaus/CommandHandler.class
+target/Parkhaus-1.0-SNAPSHOT/WEB-INF/classes/Parkhaus/Parkhaus/BackgroundJobManager.class
+target/Parkhaus-1.0-SNAPSHOT/WEB-INF/classes/Parkhaus/Parkhaus/Auto.class
+target/Parkhaus-1.0-SNAPSHOT/META-INF/MANIFEST.MF
+target/classes/Parkhaus/Parkhaus/Servlet.class
+target/classes/Parkhaus/Parkhaus/CommandHandler.class
+target/classes/Parkhaus/Parkhaus/BackgroundJobManager.class
+target/classes/Parkhaus/Parkhaus/Auto.class

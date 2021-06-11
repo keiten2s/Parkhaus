@@ -5,6 +5,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -14,8 +15,11 @@ public class BackgroundJobManager implements ServletContextListener {
 
     private static String path = System.getProperty("user.dir")+"\\"+"source_.csv";
     static StringBuilder sb = new StringBuilder();
+    public static ArrayList<String> str2;
 
     private ScheduledExecutorService scheduler;
+    ArrayList<String> str = new ArrayList<>();
+    //ArrayList<String> str2 = new ArrayList<>();
 
     @Override
     public void contextInitialized(ServletContextEvent event)  {
@@ -29,17 +33,19 @@ public class BackgroundJobManager implements ServletContextListener {
 
         scheduler = Executors.newSingleThreadScheduledExecutor();
         Scanner sc = null;
+        String test = "";
         try {
             sc = new Scanner(new File(path));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        sc.useDelimiter(",");
-        while (sc.hasNext())
-        {
-            System.out.print(sc.next());
+        sc.useDelimiter("");
+        while(sc.hasNextLine()) {
+
+            str.add(sc.nextLine().replace("leave", "enter"));
         }
         sc.close();
+        str2 = str;
     }
 
     @Override
