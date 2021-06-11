@@ -38,6 +38,7 @@ public class BackgroundJobManager implements ServletContextListener {
             sc = new Scanner(new File(path));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return;
         }
         sc.useDelimiter("");
         while(sc.hasNextLine()) {
